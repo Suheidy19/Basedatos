@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.enums import Choices
+from django.db.models.expressions import ValueRange
 
 # Create your models here.
 class Client(models.Model):
@@ -13,7 +14,6 @@ class Client(models.Model):
     Municipality=models.CharField(max_length=50,verbose_name='Municipio')
     State=models.CharField(max_length=50,verbose_name='Estado')
     Phone=models.CharField(max_length=15,verbose_name='Telefono')
-
 
     def __str__(self):
         return "{0} {1} {2}" .format(self.firstname, self.Lastname1, self.Lastname2)
@@ -94,6 +94,8 @@ class Mascot(models.Model):
     Age=models.CharField(max_length=50,verbose_name='Edad')
     type=models.CharField(choices=MASCOTTYPE, verbose_name='Especie', max_length=20)
     Client=models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Cliente')
+    foto=models.ImageField(verbose_name='Agregar imagen', null=True, upload_to='imgMascot')
+
 
     def __str__(self):
         return "{0} {1}" .format(self.name,self.race)
